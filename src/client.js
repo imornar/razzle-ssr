@@ -7,7 +7,7 @@ hydrate(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById('roomi-react-root')
 );
 
 if (module.hot) {
