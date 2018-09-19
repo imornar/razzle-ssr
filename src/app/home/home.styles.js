@@ -16,8 +16,13 @@ const homeStyles = () => ({
     padding: 20,
     color: 'white'
   },
-  homeIntro: {
-    fontSize: 'large',
+  busSvg: {
+    '& path': {
+      fill: 'blue'
+    },
+    '& circle': {
+      fill: 'yellow'
+    }
   },
   homeResources: {
     listStyle: 'none',

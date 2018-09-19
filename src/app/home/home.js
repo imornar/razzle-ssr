@@ -1,6 +1,8 @@
 import { withStyles, Button } from '@material-ui/core';
+import { Delete } from '@material-ui/icons';
 import React from 'react';
 import Logo from '../../react.svg';
+import Bus from '../../bus.svg';
 import homeStyles from './home.styles';
 
 function decorator() {
@@ -15,13 +17,11 @@ class Home extends React.Component {
     return (
       <div className={classes.home}>
         <div className={classes.homeHeader}>
-          <img src={Logo} className={classes.homeLogo} alt="logo" />
+          <Logo className={classes.homeLogo} />
           <h2>Welcome to Razzle</h2>
         </div>
-        <p className={classes.homeIntro}>
-          To get started, edit <code>src/App.js</code> or{' '}
-          <code>src/Home.js</code> and save to reload.
-        </p>
+        <Delete style={{ fontSize: 40 }}/> Material icon
+        <Bus height={50} width={50} className={classes.busSvg}/> custom svg
         <ul className={classes.homeResources}>
           <Button variant="contained" color="primary">
             Material ui button
