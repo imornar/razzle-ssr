@@ -4,22 +4,27 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import App from '../App';
 import MaterialServerProvider from '../material/material-server-provider';
+import { Provider } from 'react-redux';
+import serialize from 'serialize-javascript';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
-const renderer = (req, context) => {
+const renderer = (req, store, context) => {
 
   const sheetsRegistry = new SheetsRegistry();
 
   const markup = renderToString(
     <StaticRouter context={context} location={req.url}>
-      <MaterialServerProvider sheetsRegistry={sheetsRegistry}>
-        <App/>
-      </MaterialServerProvider>
+      <Provider store={store}>
+        <MaterialServerProvider sheetsRegistry={sheetsRegistry}>
+          <App/>
+        </MaterialServerProvider>
+      </Provider>
     </StaticRouter>
   );
 
   const css = sheetsRegistry.toString();
+  const state = store.getState();
 
   return `
 <!doctype html>
@@ -37,6 +42,7 @@ const renderer = (req, context) => {
     </head>
     <body>
         <div id="roomi-react-root">${markup}</div>
+        <script>window.__PRELOADED_STATE__ = ${serialize(state)}</script>
         <style id="jss-server-side">${css}</style>
     </body>
 </html>
