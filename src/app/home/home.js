@@ -1,7 +1,9 @@
-import { withStyles, Button } from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
+import Button from '@material-ui/core/Button/Button';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Delete from '@material-ui/icons/Delete';
 import React from 'react';
 import { connect } from 'react-redux';
+import Link from 'react-router-dom/Link';
 import { incAction } from '../../common/actions/counter-actions';
 import Logo from '../../react.svg';
 import Bus from '../../bus.svg';
@@ -24,15 +26,8 @@ class Home extends React.Component {
           <Button variant="contained" color="primary" onClick={incAction}>
             Increment
           </Button>
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle">Docs</a>
-          </li>
-          <li>
-            <a href="https://github.com/jaredpalmer/razzle/issues">Issues</a>
-          </li>
-          <li>
-            <a href="https://palmer.chat">Community Slack</a>
-          </li>
+          <br/>
+          <Link to="/about">About</Link>
         </ul>
       </div>
     );

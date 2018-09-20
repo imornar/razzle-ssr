@@ -1,4 +1,4 @@
-const appStyles = () => ({
+const layoutStyles = () => ({
   '@global': {
     body: {
       margin: 0,
@@ -8,4 +8,4 @@ const appStyles = () => ({
   }
 });
 
-export default appStyles;
+export default layoutStyles;
