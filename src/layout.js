@@ -1,9 +1,9 @@
 import withStyles from '@material-ui/core/styles/withStyles';
-import React, { Fragment, PureComponent } from 'react';
+import React, { Fragment, Component } from 'react';
 import layoutStyles from './layout.styles';
 
 @withStyles(layoutStyles)
-class Layout extends PureComponent {
+class Layout extends Component {
   // Remove the server-side injected CSS.
   componentDidMount() {
     const jssStyles = document.getElementById('jss-server-side');

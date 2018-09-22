@@ -19,7 +19,7 @@ server
     try {
       const context = {};
       const sheetsRegistry = new SheetsRegistry();
-      const store = configureStore({ count: 19 });
+      const store = configureStore();
 
       const customRenderer = (node) => {
         const Component = (
@@ -40,6 +40,7 @@ server
         res,
         routes,
         assets,
+        store,
         document: Document,
         customRenderer,
       });

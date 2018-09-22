@@ -1,3 +1,5 @@
 module.exports = {
-  INC: '[COUNTER] INC'
+  INC: '[COUNTER] INC',
+  SET: '[COUNTER] SET',
+  GET: '[COUNTER] GET'
 };

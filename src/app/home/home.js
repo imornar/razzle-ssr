@@ -4,14 +4,26 @@ import Delete from '@material-ui/icons/Delete';
 import React from 'react';
 import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
-import { incAction } from '../../common/actions/counter-actions';
+import { getAction, incAction } from '../../common/actions/counter-actions';
 import Logo from '../../react.svg';
 import Bus from '../../bus.svg';
 import homeStyles from './home.styles';
+// import sagas from '../../common/sagas';
 
-@connect(state => ({count: state.count}), { incAction })
+// const sagaResolve = (store) => new Promise((resolve) => {
+//   return store.runSaga(sagas).done.then(() => {
+//     return resolve();
+//   });
+// });
+// const delay = () => new Promise(resolve => setTimeout(() => resolve(), 2300));
+
+@connect(state => ({count: state.count}), { incAction, getAction })
 @withStyles(homeStyles)
 class Home extends React.Component {
+  static async getInitialProps({ store }) {
+    // find a way to wait for all sagas to finish
+  }
+
   render() {
     const { classes, count, incAction } = this.props;
     return (

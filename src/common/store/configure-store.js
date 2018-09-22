@@ -1,7 +1,10 @@
 import { applyMiddleware, compose, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
+import sagas from '../sagas';
 
-const middleWares = [];
+const sagaMiddleware = createSagaMiddleware();
+const middleWares = [sagaMiddleware];
 
 const REDUX_TOOLS = typeof window !== 'undefined' && process.NODE_ENV !== 'production';
 const composeEnhancers = REDUX_TOOLS ? window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose : compose;
@@ -13,9 +16,11 @@ const configureStore = preLoadedState => {
     preLoadedState,
     enchanter
   );
+  sagaMiddleware.run(sagas);
+  // store.runSaga = sagaMiddleware.run;
+  // store.close = () => store.dispatch(END);
 
   if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
       const nextRootReducer = require('../reducers').default;
       store.replaceReducer(nextRootReducer);
