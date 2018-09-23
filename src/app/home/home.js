@@ -4,24 +4,19 @@ import Delete from '@material-ui/icons/Delete';
 import React from 'react';
 import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
-import { getAction, incAction } from '../../common/actions/counter-actions';
+import { initAction, incAction } from '../../common/actions/counter-actions';
+import { getCountSelector } from '../../common/selectors/counter-selector';
+import { store } from '../../common/store/configure-store';
 import Logo from '../../react.svg';
 import Bus from '../../bus.svg';
 import homeStyles from './home.styles';
-// import sagas from '../../common/sagas';
 
-// const sagaResolve = (store) => new Promise((resolve) => {
-//   return store.runSaga(sagas).done.then(() => {
-//     return resolve();
-//   });
-// });
-// const delay = () => new Promise(resolve => setTimeout(() => resolve(), 2300));
-
-@connect(state => ({count: state.count}), { incAction, getAction })
+@connect(state => ({ count: getCountSelector(state) }), { incAction })
 @withStyles(homeStyles)
 class Home extends React.Component {
-  static async getInitialProps({ store }) {
-    // find a way to wait for all sagas to finish
+  static async getInitialProps({ isServer }) {
+    const tasks = [initAction(), { type: 'children' }];
+    await store.execSagaTasks(isServer, tasks);
   }
 
   render() {
@@ -29,7 +24,7 @@ class Home extends React.Component {
     return (
       <div className={classes.home}>
         <div className={classes.homeHeader}>
-          <Logo className={classes.homeLogo} />
+          <Logo className={classes.homeLogo}/>
           <h2>Welcome to Razzle: {count}</h2>
         </div>
         <Delete style={{ fontSize: 40 }}/> Material icon

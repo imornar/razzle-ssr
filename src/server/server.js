@@ -40,7 +40,7 @@ server
         res,
         routes,
         assets,
-        store,
+        isServer: true,
         document: Document,
         customRenderer,
       });
