@@ -3,11 +3,11 @@ logs
 npm-debug.log*
 .DS_Store
 
-coverage
 node_modules
 build
 yarn.lock
 .idea
+.translations
 .env.local
 .env.development.local
 .env.test.local

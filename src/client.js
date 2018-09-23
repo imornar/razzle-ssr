@@ -1,6 +1,7 @@
 import { After, ensureReady } from '@jaredpalmer/after';
 import React from 'react';
 import { hydrate } from 'react-dom';
+import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import Layout from './layout';
@@ -12,15 +13,17 @@ const store = configureStore(window.__PRELOADED_STATE__);
 
 ensureReady(routes).then(data => {
   return hydrate(
-    <BrowserRouter>
-      <Provider store={store}>
-        <MaterialClientProvider>
-          <Layout>
-            <After data={data} routes={routes}/>
-          </Layout>
-        </MaterialClientProvider>
-      </Provider>
-    </BrowserRouter>,
+    <IntlProvider locale="en">
+      <BrowserRouter>
+        <Provider store={store}>
+          <MaterialClientProvider>
+            <Layout>
+              <After data={data} routes={routes}/>
+            </Layout>
+          </MaterialClientProvider>
+        </Provider>
+      </BrowserRouter>
+    </IntlProvider>,
     document.getElementById('root'),
   );
 });

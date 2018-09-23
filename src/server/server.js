@@ -2,6 +2,7 @@ import { render } from '@jaredpalmer/after';
 import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { IntlProvider } from 'react-intl';
 import { SheetsRegistry } from 'react-jss/lib/jss';
 import { Provider } from 'react-redux';
 import routes from '../common/routes/routes';
@@ -23,11 +24,13 @@ server
 
       const customRenderer = (node) => {
         const Component = (
-          <Provider store={store}>
-            <MaterialServerProvider sheetsRegistry={sheetsRegistry}>
-              {node}
-            </MaterialServerProvider>
-          </Provider>
+          <IntlProvider locale="en">
+            <Provider store={store}>
+              <MaterialServerProvider sheetsRegistry={sheetsRegistry}>
+                {node}
+              </MaterialServerProvider>
+            </Provider>
+          </IntlProvider>
         );
         const html = renderToString(Component);
         const jssStyles = sheetsRegistry.toString();

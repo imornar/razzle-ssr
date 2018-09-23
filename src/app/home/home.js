@@ -10,6 +10,8 @@ import { store } from '../../common/store/configure-store';
 import Logo from '../../react.svg';
 import Bus from '../../bus.svg';
 import homeStyles from './home.styles';
+import messages from './home.text';
+import { FormattedMessage } from 'react-intl';
 
 @connect(state => ({ count: getCountSelector(state) }), { incAction })
 @withStyles(homeStyles)
@@ -27,7 +29,8 @@ class Home extends React.Component {
           <Logo className={classes.homeLogo}/>
           <h2>Welcome to Razzle: {count}</h2>
         </div>
-        <Delete style={{ fontSize: 40 }}/> Material icon
+        <FormattedMessage {...messages.home}/>
+        <Delete style={{ fontSize: 40 }}/> Material icon.
         <Bus height={50} width={50} className={classes.busSvg}/> custom svg
         <ul className={classes.homeResources}>
           <Button variant="contained" color="primary" onClick={incAction}>
