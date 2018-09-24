@@ -33,7 +33,6 @@ class CustomDocument extends React.Component {
         <head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta charSet="utf-8" />
-          <title>Razzle + Redux + After</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link href="https://roomifonts.s3-us-west-2.amazonaws.com/fonts.css" rel="stylesheet"/>
           {helmet.title.toComponent()}
