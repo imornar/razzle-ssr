@@ -3,7 +3,7 @@ import app from './server/server';
 
 if (module.hot) {
   module.hot.accept('./server/server', () => {
-    console.log('🔁  HMR Reloading `./server/server`...');
+    console.log('🔁  Server-side HMR Reloading...');
   });
   console.info('✅  Server-side HMR Enabled!');
 }

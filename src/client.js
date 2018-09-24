@@ -12,25 +12,23 @@ import history from './common/history';
 
 const store = configureStore(window.__PRELOADED_STATE__);
 
-ensureReady(routes).then(data => {
-  return hydrate(
-    <IntlProvider locale="en">
-      <Router history={history}>
-        <Provider store={store}>
-          <MaterialClientProvider>
-            <Layout>
-              <After data={data} routes={routes}/>
-            </Layout>
-          </MaterialClientProvider>
-        </Provider>
-      </Router>
-    </IntlProvider>,
-    document.getElementById('root'),
-  );
-});
+const reHydrate = () => ensureReady(routes).then(data => hydrate(
+  <IntlProvider locale="en">
+    <Router history={history}>
+      <Provider store={store}>
+        <MaterialClientProvider>
+          <Layout>
+            <After data={data} routes={routes}/>
+          </Layout>
+        </MaterialClientProvider>
+      </Provider>
+    </Router>
+  </IntlProvider>,
+  document.getElementById('root'),
+));
+reHydrate();
 
-// this updates reducer's hot reloading and throws console warning.
-// TODO: find better solution for HOT reload
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept(['./layout','./common/routes/routes'], reHydrate);
+  console.info('✅  Client-side HMR Enabled!');
 }
