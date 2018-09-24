@@ -1,5 +1,6 @@
 // base config is in node_modules/razzle/node_modules/razzle/config/createConfig.js
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const makeLoaderFinder = require('razzle-dev-utils/makeLoaderFinder');
 
 module.exports = {
@@ -15,6 +16,9 @@ module.exports = {
 
     // Lets use analyzer only on builds, since in development webpack does not run tree shake
     if (!dev) extendedConfig.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'static' }));
+
+    // reduces package bundle size
+    extendedConfig.plugins.push(new LodashModuleReplacementPlugin);
 
     // First we need prevent file-loader to target svg files
     extendedConfig.module.rules[extendedConfig.module.rules.findIndex(makeLoaderFinder('file-loader'))].exclude.push(/\.svg$/);

@@ -1,9 +1,10 @@
 {
   "presets": [
-    "razzle/babel" // NEEDED
+    "razzle/babel"
   ],
   "plugins": [
     "transform-decorators-legacy",
+    "lodash",
     ["react-intl", {
       "messagesDir": "./.translations"
     }]
