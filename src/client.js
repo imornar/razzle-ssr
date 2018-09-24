@@ -3,18 +3,19 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import BrowserRouter from 'react-router-dom/BrowserRouter';
+import Router from 'react-router-dom/Router';
 import Layout from './layout';
 import routes from './common/routes/routes';
 import configureStore from './common/store/configure-store';
 import MaterialClientProvider from './material/material-client-provider';
+import history from './common/history';
 
 const store = configureStore(window.__PRELOADED_STATE__);
 
 ensureReady(routes).then(data => {
   return hydrate(
     <IntlProvider locale="en">
-      <BrowserRouter>
+      <Router history={history}>
         <Provider store={store}>
           <MaterialClientProvider>
             <Layout>
@@ -22,7 +23,7 @@ ensureReady(routes).then(data => {
             </Layout>
           </MaterialClientProvider>
         </Provider>
-      </BrowserRouter>
+      </Router>
     </IntlProvider>,
     document.getElementById('root'),
   );

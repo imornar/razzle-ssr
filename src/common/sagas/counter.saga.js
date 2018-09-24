@@ -6,10 +6,10 @@ import { INIT } from '../types/counter-types';
 const apiCall = () => new Promise((resolve) => {
   setTimeout(() => {
     resolve(99);
-  }, 2000);
+  }, 20);
 });
 
-const delay = () => new Promise((resolve) => setTimeout(() => resolve(), 6000));
+const delay = () => new Promise((resolve) => setTimeout(() => resolve(), 40));
 
 function* counterSaga() {
   try {
