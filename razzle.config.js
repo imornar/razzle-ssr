@@ -19,6 +19,8 @@ module.exports = {
 
     // reduces package bundle size
     extendedConfig.plugins.push(new LodashModuleReplacementPlugin);
+    // TODO ideally replace moment with smaller lib
+    extendedConfig.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
 
     // First we need prevent file-loader to target svg files
     extendedConfig.module.rules[extendedConfig.module.rules.findIndex(makeLoaderFinder('file-loader'))].exclude.push(/\.svg$/);
