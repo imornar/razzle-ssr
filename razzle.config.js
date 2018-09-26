@@ -2,6 +2,8 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const makeLoaderFinder = require('razzle-dev-utils/makeLoaderFinder');
+const helpers = require('razzle-dev-utils/WebpackConfigHelpers');
+const packageJson = require('./package.json');
 
 module.exports = {
   modify: (config, { target, dev }, webpack) => {
@@ -21,6 +23,10 @@ module.exports = {
     extendedConfig.plugins.push(new LodashModuleReplacementPlugin);
     // TODO ideally replace moment with smaller lib
     extendedConfig.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
+
+    // custom env variables
+    const definitionsPlugin = new helpers().getPluginsByName(extendedConfig, 'DefinePlugin')[0].plugin.definitions;
+    definitionsPlugin['process.env.APP_VERSION'] = JSON.stringify(packageJson.version);
 
     // First we need prevent file-loader to target svg files
     extendedConfig.module.rules[extendedConfig.module.rules.findIndex(makeLoaderFinder('file-loader'))].exclude.push(/\.svg$/);
